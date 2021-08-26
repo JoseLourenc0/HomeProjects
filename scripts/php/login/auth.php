@@ -3,6 +3,7 @@
 	session_start();
 
 	$_SESSION['logged'] = false;
+	$_SESSION['fa'] = false;
 
 	$name = addslashes($_POST['name']);
 	$password = addslashes($_POST['password']);
@@ -19,6 +20,7 @@
 		if($stm->rowCount()>=1){
 
 			$_SESSION['logged'] = true;
+			$_SESSION['fa'] = true;
 			echo ($_SESSION['logged']);
 			header('Location: ../../../HomeActivities.php');
 
