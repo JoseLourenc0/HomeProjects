@@ -22,7 +22,7 @@
 			$_SESSION['logged'] = true;
 			$_SESSION['fa'] = true;
 			echo ($_SESSION['logged']);
-			header('Location: ../../../HomeActivities.php');
+			header('Location: ../../../app/HomeActivities/index.php');
 
 		}else{
 

@@ -9,7 +9,7 @@ if(!$_SESSION['logged'] && !$_SESSION['fa'])
     echo 'Incorrect Keys';
 
 if($_SESSION['logged'])
-    header('Location: ./HomeActivities.php');
+    header('Location: ./app/HomeActivities/index.php');
 
 
 require_once 'layout/login.html';
