@@ -9,6 +9,3 @@
         echo $e->getMessage();
         exit;
     }
-
-
-?>

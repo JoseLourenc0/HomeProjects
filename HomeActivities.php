@@ -1,5 +1,13 @@
 <?php
 
+    session_start();
+
+    $_SESSION['logged'] = $_SESSION['logged'] ?? false;
+
+    if($_SESSION['logged']===false){
+        header('Location: index.php');
+    }
+
     echo "You're on the system now";
 
 ?>
