@@ -1,0 +1,34 @@
+.box{
+    margin: 0 auto;
+    min-height: 6em;
+    padding: 30px;	
+    color:#38373B;
+    text-align: center;
+}
+
+.box:nth-child(even){
+    background-color: #F5F5F5;
+}
+
+.box:nth-child(odd){
+    background-color: #DDD;
+}
+
+.box > .idreg{
+    width:10%;
+    display:inline-block;
+}
+
+.box > .usrreg{
+    width:30%;
+    display:inline-block;		
+}
+
+.box > .datereg{
+    width: 45%;
+    display:inline-block;		
+}
+
+nav{
+    margin: 0;
+}

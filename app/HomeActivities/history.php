@@ -12,9 +12,9 @@
 
 ?>
 
-<script src="../../scripts/js/homeactivities/index.js"></script>
+<script src="../../scripts/js/homeactivities/history.js"></script>
 
-<link rel="stylesheet" href="../../assets/css/homeactivities/index.css">
+<link rel="stylesheet" href="../../assets/css/homeactivities/history.css">
 
 <?php
 
