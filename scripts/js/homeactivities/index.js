@@ -1,74 +1,92 @@
-let arr = ['PRIMEIRO','SEGUNDO','TERCEIRO','QUARTO']
+let arr = new Array()
 
-let root = document.getElementById('root')
+$.ajax({
 
-root.innerHTML = '<section id = "section-creation">'
+    url:'../../scripts/php/homeactivities/getusers.php',
+    method:'GET',
+    dataType:'json'
 
-let section = document.getElementById('section-creation')
+}).done(e=>{
+    console.log(e)
+    if(e){
 
-if(typeof arr !== 'undefined'){
+        e.forEach((element,i) => {
+            arr[i] = element.name
+        })
 
-    if(arr.length%2===0){
+        let root = document.getElementById('root')
 
-        for(let i = 0 ; i < arr.length/2 ; i++){
-            
-            let u = i + 1
+        root.innerHTML = '<section id = "section-creation">'
 
-            section.innerHTML += 
-                `<div class = "even">
-                    <input onclick = newReg('${arr[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
-                    <input onclick = newReg('${arr[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
-                </div>
-                <br>
-                `
-            
-        }
+        let section = document.getElementById('section-creation')
 
-        section.innerHTML += '</section>'
+        if(typeof arr !== 'undefined'){
 
-    }else{
+            if(arr.length%2===0){
 
-        if(arr.length!==1){
-            
-            for(let i = 0 ; i < arr.length/2-1 ; i++){
-                
-                let u = i + 1
+                for(let i = 0 ; i < arr.length/2 ; i++){
+                    
+                    let u = i + 1
+
+                    section.innerHTML += 
+                        `<div class = "even">
+                            <input onclick = newReg('${arr[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
+                            <input onclick = newReg('${arr[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
+                        </div>
+                        <br>
+                        `
+                    
+                }
+
+                section.innerHTML += '</section>'
+
+            }else{
+
+                if(arr.length!==1){
+                    
+                    for(let i = 0 ; i < arr.length/2-1 ; i++){
+                        
+                        let u = i + 1
+
+                        section.innerHTML += 
+                            `<div class = "even">
+                                <input onclick = newReg('${arr[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
+                                <input onclick = newReg('${arr[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
+                            </div>
+                            <br>
+                            `
+                        
+                    }
+                }
 
                 section.innerHTML += 
-                    `<div class = "even">
-                        <input onclick = newReg('${arr[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
-                        <input onclick = newReg('${arr[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
-                    </div>
-                    <br>
-                    `
-                
+                        `<div class = "odd">
+                            <input onclick = newReg('${arr[arr.length-1]}') animation = "top" type = "button" id = "${arr[arr.length-1]}_element" value = "${arr[arr.length-1]}">
+                        </div>
+                        <br>
+                        `
+
+                section.innerHTML += '</section>'
+            }
+
+        }
+
+        function newReg(usr){
+
+            if(typeof usr !== 'undefined'){
+
+                $.ajax({
+                    url: '../../scripts/php/homeactivities/regnewactivity.php',
+                    data: {usr},
+                    method: 'POST',
+                    dataType: 'json'
+                }).done(function(e){
+                    console.log(e)
+                })
+
             }
         }
 
-        section.innerHTML += 
-                `<div class = "odd">
-                    <input onclick = newReg('${arr[arr.length-1]}') animation = "top" type = "button" id = "${arr[arr.length-1]}_element" value = "${arr[arr.length-1]}">
-                </div>
-                <br>
-                `
-
-        section.innerHTML += '</section>'
     }
+})
 
-}
-
-function newReg(usr){
-
-    if(typeof usr !== 'undefined'){
-
-        $.ajax({
-            url: '../../scripts/php/homeactivities/regnewactivity.php',
-            data: {usr},
-            method: 'POST',
-            dataType: 'json'
-        }).done(function(e){
-            console.log(e)
-        })
-
-    }
-}

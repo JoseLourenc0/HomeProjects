@@ -1,6 +1,6 @@
 <?php
 
-    $dbhost = '';
-    $dbname = '';
-    $dbusrname = '';
+    $dbhost = 'localhost';
+    $dbname = 'homeprojects';
+    $dbusrname = 'root';
     $dbusrpass = '';
