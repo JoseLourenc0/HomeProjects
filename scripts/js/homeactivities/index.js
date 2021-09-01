@@ -7,7 +7,7 @@ $.ajax({
     dataType:'json'
 
 }).done(e=>{
-    console.log(e)
+    
     if(e){
 
         e.forEach((element,i) => {
@@ -24,7 +24,7 @@ $.ajax({
 
             if(arr.length%2===0){
 
-                for(let i = 0 ; i < arr.length/2 ; i++){
+                for(let i = 0 ; i < arr.length ; i+=2){
                     
                     let u = i + 1
 
@@ -44,9 +44,12 @@ $.ajax({
 
                 if(arr.length!==1){
                     
-                    for(let i = 0 ; i < arr.length/2-1 ; i++){
+                    for(let i = 0 ; i < arr.length ; i+=2){
                         
                         let u = i + 1
+
+                        if(arr.length-i===1)
+                            break
 
                         section.innerHTML += 
                             `<div class = "even">

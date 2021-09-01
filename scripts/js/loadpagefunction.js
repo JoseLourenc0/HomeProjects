@@ -1,36 +1,35 @@
-function addScript(arquivo){
+function addScript(file){
     let js = document.createElement("script");
 
     js.type = "text/javascript";
-    js.src = 'scripts/js/'+arquivo+'.js';
+    js.src = 'scripts/js/'+file+'.js';
 
     document.head.appendChild(js);
 }
 
-function mudaTitle(titulo){
-    document.querySelectorAll('title')[0].innerHTML = titulo
+function selectByTitle(title){
+    document.querySelectorAll('title')[0].innerHTML = title
 }
 
 addEventListener('load',function(){
-    let urldosite = window.location.href
+    let url = window.location.href
     let itemnav = document.getElementsByClassName('nav-item')
 
-    if(urldosite.includes('cadastronoestoque')){
+    if(url.includes('index')){
         addScript('app')
         itemnav[0].classList.add('active')
-        mudaTitle('HOME')
+        selectByTitle('HOME')
     }
 
-    if(urldosite.includes('consulta')){
+    if(url.includes('controlusers')){
         addScript('app')
         itemnav[1].classList.add('active')
-        mudaTitle('New User')
+        selectByTitle('New User')
     }
 
-    if(urldosite.includes('registranotas')){
-        addScript('registranotas')
+    if(url.includes('history')){
+        addScript('app')
         itemnav[2].classList.add('active')
-        mudaTitle('History')
+        selectByTitle('History')
     }
-/* alert(window.onload) */
 })
