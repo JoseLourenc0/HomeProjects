@@ -66,6 +66,8 @@ $.ajax({
                 //     </div>
                 // `
         })
+    }else{
+        root.innerHTML += '<div class = "text-light" align = "center">NO ACTIVITES YET</div>'
     }
 })
 }

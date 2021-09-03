@@ -3,16 +3,29 @@ $.ajax({
     method:'GET',
     dataType:'json'
 }).done(e=>{
-    console.log(e)
 
     let root = document.getElementById('root')
 
-    root.innerHTML += `
-    <h3 class="text-light" align="center">
-        Last Activity by: ${e.usr_reg} at ${e.date_reg}
-    </h3>
-    <br>
-    `
+    if(e){
+
+        root.innerHTML += `
+        <h3 class="text-light" align="center">
+            Last Activity by: ${e.usr_reg} at ${e.date_reg}
+        </h3>
+        <br>
+        `
+
+    }else{
+
+        root.innerHTML += 
+        `
+        <h3 class="text-light" align="center">
+            Last Activity by: No one at Never
+        </h3>
+        <br>
+        `
+
+    }
 
 })
 
