@@ -32,3 +32,7 @@
 nav{
     margin: 0;
 }
+
+th , td{
+    color: #f8f9fa!important;
+}

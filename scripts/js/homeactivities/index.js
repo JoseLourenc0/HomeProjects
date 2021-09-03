@@ -94,19 +94,22 @@ $.ajax({
     }
 })
 
-        function newReg(usr){
+function newReg(usr){
+    if(typeof usr !== 'undefined'){
 
-            if(typeof usr !== 'undefined'){
+        $.ajax({
 
-                $.ajax({
-                    url: '../../scripts/php/homeactivities/regnewactivity.php',
-                    data: {usr},
-                    method: 'POST',
-                    dataType: 'json'
-                }).done(function(e){
-                    console.log(e)
-                })
+            url: '../../scripts/php/homeactivities/regnewactivity.php',
+            data: {usr},
+            method: 'POST',
+            dataType: 'json'
 
-            }
-        }
+        }).done(function(e){
+
+            console.log(e)
+
+        })
+
+    }
+}
 
