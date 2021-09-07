@@ -91,6 +91,7 @@ function createNewUser(){
 						document.getElementById('name').value = ''
 						document.getElementById('username').value = ''
 						document.getElementById('password').value = ''
+						getUsers()
 					}
 				}
 				)
@@ -120,7 +121,7 @@ function getUsers(){
 	            let btn = document.createElement('button')
 	            btn.className = 'btn btn-primary'
 	            btn.innerHTML = '<i class="fa fa-search"></i>'
-	            btn.id = `id_cidade_${element.id}`
+	            btn.id = `id_button_info_${element.id}`
 	            btn.onclick = e=>{
 	                e.preventDefault()
 	                console.log(`BUTTON ONCLICK TEST\nID:${element.id}\nUSER:${element.name}`)
@@ -130,11 +131,19 @@ function getUsers(){
 	            let btn2 = document.createElement('button')
 	            btn2.className = 'btn btn-danger'
 	            btn2.innerHTML = '<i class="fa fa-times"></i>'
-	            btn2.id = `id_cidade_${element.id}`
+	            btn2.id = `id_button_delete_${element.id}`
 	            btn2.onclick = e=>{
 	                e.preventDefault()
-	                console.log(`BUTTON ONCLICK TEST\nID:${element.id}\nUSER:${element.name}`)
-	                buildModal({btn_class:'primary'})
+	                $.ajax({
+	                	url:'../../scripts/php/homeactivities/deleteuser.php',
+	                	method:'POST',
+	                	data:{id:element.id},
+	                	dataType:'json'
+	                }).done(e=>
+	                	{
+	                		e===1?getUsers():''
+	                	}
+	                )
 	            }
 	            row.insertCell(3).append(btn2)
 

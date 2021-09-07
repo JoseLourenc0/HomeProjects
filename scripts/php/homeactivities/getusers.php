@@ -4,7 +4,7 @@
 
     try{
 
-        $stm= $pdo->prepare('SELECT * FROM tb_user WHERE name<>"" ORDER BY name');
+        $stm= $pdo->prepare('SELECT id,name FROM tb_user WHERE name<>"" ORDER BY name');
 
         $stm->execute();
 
