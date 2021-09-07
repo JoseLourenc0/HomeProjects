@@ -134,16 +134,16 @@ function getUsers(){
 	            btn2.onclick = e=>{
 	                e.preventDefault()
 	                console.log(`BUTTON ONCLICK TEST\nID:${element.id}\nUSER:${element.name}`)
+	                buildModal({btn_class:'primary'})
 	            }
 	            row.insertCell(3).append(btn2)
 
 	        })
 	    }else{
-	        root.innerHTML += '<div class = "text-light" align = "center">NO ACTIVITES YET</div>'
+	        root.innerHTML += '<div class = "text-light" align = "center">NO USERS YET</div>'
 	    }
 	})
 }
-
 
 buildSkeleton()
 getUsers()

@@ -33,3 +33,23 @@ addEventListener('load',function(){
         selectByTitle('History')
     }
 })
+
+function buildModal(
+    {
+        title='Modal',
+        modal_title_div='Modal Title',
+        modal_content='Modal content',
+        btn_text='Button text',
+        btn_class='danger'
+    }
+    =
+    {}
+    ){
+    document.getElementById('modal_title').innerHTML = title
+    document.getElementById('modal_title_div').className = modal_title_div
+    document.getElementById('modal_content').innerHTML = modal_content
+    document.getElementById('modal_btn').innerHTML = btn_text
+    document.getElementById('modal_btn').className = `btn btn-${btn_class}`
+    $('#modalUtilities').modal('show')
+
+}
