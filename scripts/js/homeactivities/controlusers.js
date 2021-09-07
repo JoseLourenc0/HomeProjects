@@ -1,49 +1,76 @@
 let root = document.getElementById('root')
 
-root.innerHTML=
-`<div class="text-light" align="center">
-    
-    <form onsubmit="return false">
+function buildSkeleton(){
+	root.innerHTML=
+	`<div class="text-light" align="center">
+	    
+	    <form onsubmit="return false">
 
-        <div class="form-group row col-md-6">
-            
-            <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
-            
-            <div class="col-sm-10">
-            
-                <input type="text" class="form-control" id="name" placeholder="Name" required>
-            
-            </div>
+	        <div class="form-group row col-md-6">
+	            
+	            <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+	            
+	            <div class="col-sm-10">
+	            
+	                <input type="text" class="form-control" id="name" placeholder="Name" required>
+	            
+	            </div>
 
+	        </div>
+
+	        <div class="form-group row col-md-6">
+	            
+	            <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+	            
+	            <div class="col-sm-10">
+	            
+	                <input type="text" class="form-control" id="username" placeholder="Username (used to access the system)" required>
+	            
+	            </div>
+
+	        </div>
+
+	        <div class="form-group row col-md-6">
+	            
+	            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+	            
+	            <div class="col-sm-10">
+	            
+	                <input type="password" class="form-control" id="password" placeholder="Password" required>
+	            
+	            </div>
+
+	        </div>
+	        <input type="submit" class="btn btn-primary col-md-6" onclick="createNewUser()" value="CREATE NEW USER">
+	    </form>
+
+	</div>
+
+	<div class="container">
+      <div class="row">
+        <div class="col">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Settings</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+
+            <tbody id="listUsers">
+
+            </tbody>
+            
+          </table>
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row col-md-6">
-            
-            <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
-            
-            <div class="col-sm-10">
-            
-                <input type="text" class="form-control" id="username" placeholder="Username (used to access the system)" required>
-            
-            </div>
+	`
 
-        </div>
-
-        <div class="form-group row col-md-6">
-            
-            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-            
-            <div class="col-sm-10">
-            
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
-            
-            </div>
-
-        </div>
-        <input type="submit" class="btn btn-primary col-md-6" onclick="createNewUser()" value="CREATE NEW USER">
-    </form>
-
-</div>`
+}
 
 function createNewUser(){
 	
@@ -69,3 +96,45 @@ function createNewUser(){
 				)
 			}
 }
+
+function getUsers(){
+	$.ajax({
+
+	    url:'../../scripts/php/homeactivities/getusers.php',
+	    method:'GET',
+	    dataType:'json'
+	    
+	}).done(function(e){
+
+	    if(e){console.log(e)
+
+	        let listh = document.getElementById('listUsers')
+	        listh.innerHTML = ''
+
+	        e.forEach(element => {
+	            let row = listh.insertRow()
+
+	            row.insertCell(0).innerHTML = element.id
+	            row.insertCell(1).innerHTML = element.name
+
+	            let btn = document.createElement('button')
+	            btn.className = 'btn btn-primary'
+	            btn.innerHTML = '<i class="fa fa-search"></i>'
+	            btn.id = `id_cidade_${element.id}`
+	            btn.onclick = e=>{
+	                e.preventDefault()
+	                console.log(`BUTTON ONCLICK TEST\nID:${element.id_reg}\nUSER:${element.usr_reg}`)
+	            }
+	            row.insertCell(2).append(btn)
+
+	            
+	        })
+	    }else{
+	        root.innerHTML += '<div class = "text-light" align = "center">NO ACTIVITES YET</div>'
+	    }
+	})
+}
+
+
+buildSkeleton()
+getUsers()
