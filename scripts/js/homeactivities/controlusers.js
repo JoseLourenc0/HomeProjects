@@ -106,7 +106,7 @@ function getUsers(){
 	    
 	}).done(function(e){
 
-	    if(e){console.log(e)
+	    if(e){
 
 	        let listh = document.getElementById('listUsers')
 	        listh.innerHTML = ''
@@ -123,11 +123,20 @@ function getUsers(){
 	            btn.id = `id_cidade_${element.id}`
 	            btn.onclick = e=>{
 	                e.preventDefault()
-	                console.log(`BUTTON ONCLICK TEST\nID:${element.id_reg}\nUSER:${element.usr_reg}`)
+	                console.log(`BUTTON ONCLICK TEST\nID:${element.id}\nUSER:${element.name}`)
 	            }
 	            row.insertCell(2).append(btn)
 
-	            
+	            let btn2 = document.createElement('button')
+	            btn2.className = 'btn btn-danger'
+	            btn2.innerHTML = '<i class="fa fa-times"></i>'
+	            btn2.id = `id_cidade_${element.id}`
+	            btn2.onclick = e=>{
+	                e.preventDefault()
+	                console.log(`BUTTON ONCLICK TEST\nID:${element.id}\nUSER:${element.name}`)
+	            }
+	            row.insertCell(3).append(btn2)
+
 	        })
 	    }else{
 	        root.innerHTML += '<div class = "text-light" align = "center">NO ACTIVITES YET</div>'
