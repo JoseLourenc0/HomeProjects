@@ -12,7 +12,7 @@
 
         try{
 
-            $stm= $pdo->prepare('INSERT INTO tb_user (name,user_name,email,phonenumber,user_password) VALUES (:name,:username,:email,:phonenumber,:userpassword)');
+            $stm= $pdo->prepare('INSERT INTO tb_user (name,user_name,email,phonenumber,user_password,date_creation) VALUES (:name,:username,:email,:phonenumber,:userpassword,NOW())');
             $stm ->bindValue(':name',$user_name);
             $stm ->bindValue(':username',$user_username);
             $stm ->bindValue(':email',$user_email);

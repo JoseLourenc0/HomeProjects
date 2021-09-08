@@ -45,6 +45,7 @@ function getLastActivity(){
 
 
 let arr = new Array()
+let arr2 = new Array()
 
 function getUsers(){
     $.ajax({
@@ -59,6 +60,7 @@ function getUsers(){
 
             e.forEach((element,i) => {
                 arr[i] = element.name
+                arr2[i] = element.user_name
             })
 
             root.innerHTML += '<section id = "section-creation">'
@@ -75,8 +77,8 @@ function getUsers(){
 
                         section.innerHTML += 
                             `<div class = "even">
-                                <input onclick = newReg('${arr[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
-                                <input onclick = newReg('${arr[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
+                                <input onclick = newReg('${arr[i]}','${arr2[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
+                                <input onclick = newReg('${arr[u]}','${arr2[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
                             </div>
                             <br>
                             `
@@ -98,8 +100,8 @@ function getUsers(){
 
                             section.innerHTML += 
                                 `<div class = "even">
-                                    <input onclick = newReg('${arr[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
-                                    <input onclick = newReg('${arr[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
+                                    <input onclick = newReg('${arr[i]}','${arr2[i]}') animation = "left" type = "button" id = "${arr[i]}_element" value = "${arr[i]}">
+                                    <input onclick = newReg('${arr[u]}','${arr2[u]}') animation = "right" type = "button" id = "${arr[u]}_element" value = "${arr[u]}">
                                 </div>
                                 <br>
                                 `
@@ -109,7 +111,7 @@ function getUsers(){
 
                     section.innerHTML += 
                             `<div class = "odd">
-                                <input onclick = newReg('${arr[arr.length-1]}') animation = "top" type = "button" id = "${arr[arr.length-1]}_element" value = "${arr[arr.length-1]}">
+                                <input onclick = newReg('${arr[arr.length-1]}','${arr2[arr2.length-1]}') animation = "top" type = "button" id = "${arr[arr.length-1]}_element" value = "${arr[arr.length-1]}">
                             </div>
                             <br>
                             `
@@ -122,13 +124,13 @@ function getUsers(){
     })
 }
 
-function newReg(usr){
+function newReg(usr,username){
     if(typeof usr !== 'undefined'){
 
         $.ajax({
 
             url: '../../scripts/php/homeactivities/regnewactivity.php',
-            data: {usr},
+            data: {usr,username},
             method: 'POST',
             dataType: 'json'
 

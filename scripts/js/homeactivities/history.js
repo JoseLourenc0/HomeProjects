@@ -42,6 +42,14 @@ $.ajax({
         listh.innerHTML = ''
 
         e.forEach(element => {
+            let info = new Object
+            arr.forEach((element2,index)=>{
+                if(arr[index][0] == element.username){
+                    info.email = arr[index][1]
+                    info.phonenumber = arr[index][2]
+                }
+            })
+
             let row = listh.insertRow()
 
             row.insertCell(0).innerHTML = element.id_reg
@@ -54,7 +62,19 @@ $.ajax({
             btn.id = `id_cidade_${element.id_reg}`
             btn.onclick = e=>{
                 e.preventDefault()
-                console.log(`BUTTON ONCLICK TEST\nID:${element.id_reg}\nUSER:${element.usr_reg}`)
+                buildModal({
+                    title:'Details',
+                    modal_content:`
+                    <h3>Details</h3>
+                    <br>
+                    <p><b>Name:</b> ${element.usr_reg} </p>
+                    <p><b>E-mail:</b> ${info.email} </p>
+                    <p><b>Number:</b> ${info.phonenumber} </p>
+                    <p><b>Activity registered at:</b> ${element.date_reg} </p>
+                    `,
+                    btn_text:'Close',
+                    btn_class:'secondary'
+                })
             }
 
             row.insertCell(3).append(btn)
@@ -72,5 +92,25 @@ $.ajax({
 })
 }
 
+let arr = new Array()
+
+function getUsers(){
+    $.ajax({
+
+        url:'../../scripts/php/homeactivities/getusers.php',
+        method:'GET',
+        dataType:'json'
+        
+    }).done(e=>{
+        e.forEach((element,i)=>{
+            arr[i] = new Array()
+            arr[i][0] = element.user_name
+            arr[i][1] = element.email
+            arr[i][2] = element.phonenumber
+        })
+    })
+}
+
+getUsers()
 buildSkeleton()
 getHistory()

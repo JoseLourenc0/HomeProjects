@@ -1,6 +1,7 @@
 <?php
 
     $usr = addslashes($_POST['usr']);
+    $username = addslashes($_POST['username']);
 
     if(isset($usr)){
 
@@ -8,8 +9,9 @@
 
         try{
 
-            $stm= $pdo->prepare('INSERT INTO tb_homeactivities (id_reg,usr_reg,date_reg) VALUES (NULL,:user,NOW())');
+            $stm= $pdo->prepare('INSERT INTO tb_homeactivities (id_reg,usr_reg,username,date_reg) VALUES (NULL,:user,:username,NOW())');
             $stm ->bindValue(':user',$usr);
+            $stm ->bindValue(':username',$username);
 
             $stm->execute();
 

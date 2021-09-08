@@ -48,7 +48,7 @@ function buildSkeleton(){
 	            
 	            <div class="col-sm-10">
 	            
-	                <input pattern="[0-9]{8,9,10,11,12}" type="tel" class="form-control" id="phonenumber" placeholder="Phone Number" required>
+	                <input type="tel" class="form-control" id="phonenumber" placeholder="Phone Number" required>
 	            
 	            </div>
 
@@ -159,13 +159,13 @@ function getUsers(){
 	                	modal_content:`
 	                	<h3>Details</h3>
 	                	<br>
-	                	<p><b>Name:</b> ${element.name}</p>
-	                	<p><b>E-mail:</b> ${element.email}</p>
-	                	<p><b>Number:</b> ${element.phonenumber}</p>
+	                	<p><b>Name:</b> ${element.name} </p>
+	                	<p><b>E-mail:</b> ${element.email} </p>
+	                	<p><b>Number:</b> ${element.phonenumber} </p>
+	                	<p><b>Registered at:</b> ${element.date_creation} </p>
 	                	`,
 	                	btn_text:'Close',
-	                	btn_class:'secondary',
-
+	                	btn_class:'secondary'
 	                })
 	            }
 	            row.insertCell(2).append(btn)
