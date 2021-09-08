@@ -32,6 +32,30 @@ function buildSkeleton(){
 
 	        <div class="form-group row col-md-6">
 	            
+	            <label for="staticEmail" class="col-sm-2 col-form-label">E-mail</label>
+	            
+	            <div class="col-sm-10">
+	            
+	                <input type="email" class="form-control" id="email" placeholder="E-mail" required>
+	            
+	            </div>
+
+	        </div>
+
+	        <div class="form-group row col-md-6">
+	            
+	            <label class="col-sm-2 col-form-label">Phone</label>
+	            
+	            <div class="col-sm-10">
+	            
+	                <input pattern="[0-9]{8,9,10,11,12}" type="tel" class="form-control" id="phonenumber" placeholder="Phone Number" required>
+	            
+	            </div>
+
+	        </div>
+
+	        <div class="form-group row col-md-6">
+	            
 	            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
 	            
 	            <div class="col-sm-10">
@@ -54,7 +78,7 @@ function buildSkeleton(){
               <tr>
                 <th>ID</th>
                 <th>User</th>
-                <th>Settings</th>
+                <th>Details</th>
                 <th>Delete</th>
               </tr>
             </thead>
@@ -76,26 +100,32 @@ function createNewUser(){
 	
 	let user_name = document.getElementById('name').value
 	let user_username = document.getElementById('username').value
+	let user_email = document.getElementById('email').value
+	let user_phonenumber = document.getElementById('phonenumber').value
 	let user_password = document.getElementById('password').value
 
 	if(user_name != false && user_name != '' && user_name != undefined && user_name != null)
 		if(user_username != false && user_username != '' && user_username != undefined && user_username != null)
-			if(user_password != false && user_password != '' && user_password != undefined && user_password != null){
-				$.ajax({
-					url:'../../scripts/php/homeactivities/regnewuser.php',
-					data:{user_name,user_username,user_password},
-					method:'POST',
-					dataType:'json'
-				}).done(e=>{
-					if(e===1){
-						document.getElementById('name').value = ''
-						document.getElementById('username').value = ''
-						document.getElementById('password').value = ''
-						getUsers()
+			if(user_email != false && user_email != '' && user_email != undefined && user_email != null)
+				if(user_phonenumber != false && user_phonenumber != '' && user_phonenumber != undefined && user_phonenumber != null)
+					if(user_password != false && user_password != '' && user_password != undefined && user_password != null){
+						$.ajax({
+							url:'../../scripts/php/homeactivities/regnewuser.php',
+							data:{user_name,user_username,user_email,user_phonenumber,user_password},
+							method:'POST',
+							dataType:'json'
+						}).done(e=>{
+							if(e===1){
+								document.getElementById('name').value = ''
+								document.getElementById('username').value = ''
+								document.getElementById('email').value = ''
+								document.getElementById('phonenumber').value = ''
+								document.getElementById('password').value = ''
+								getUsers()
+							}
+						}
+						)
 					}
-				}
-				)
-			}
 }
 
 function getUsers(){
@@ -124,7 +154,19 @@ function getUsers(){
 	            btn.id = `id_button_info_${element.id}`
 	            btn.onclick = e=>{
 	                e.preventDefault()
-	                console.log(`BUTTON ONCLICK TEST\nID:${element.id}\nUSER:${element.name}`)
+	                buildModal({
+	                	title:'Details',
+	                	modal_content:`
+	                	<h3>Details</h3>
+	                	<br>
+	                	<p><b>Name:</b> ${element.name}</p>
+	                	<p><b>E-mail:</b> ${element.email}</p>
+	                	<p><b>Number:</b> ${element.phonenumber}</p>
+	                	`,
+	                	btn_text:'Close',
+	                	btn_class:'secondary',
+
+	                })
 	            }
 	            row.insertCell(2).append(btn)
 
