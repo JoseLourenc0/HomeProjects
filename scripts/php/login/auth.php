@@ -20,6 +20,7 @@
 		if($stm->rowCount()>=1){
 
 			$_SESSION['logged'] = true;
+			$_SESSION['name'] = $stm->fetchAll(PDO::FETCH_ASSOC)[0]['name'];
 			$_SESSION['fa'] = true;
 			echo ($_SESSION['logged']);
 			header('Location: ../../../app/HomeActivities/index.php');
